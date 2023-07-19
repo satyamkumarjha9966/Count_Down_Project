@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Down Project</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 100vh;
+            width: 100vw;
+            background-image: url(bg.jpg);
+            background-size: cover;
+        }
+        .overlay{
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .title{
+            font-size: 2.5rem;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .col{
+            width: 1000px;
+            margin: 20px auto;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        input{
+            height: 50px;
+            width: 50%;
+            border-radius: 8px;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="overlay">
+            <div class="title">We are comming Soon</div>
+            <div class="title" id="endDate"></div>
+            <div class="col">
+                <div>
+                    <input type="text" readonly value="0">
+                    <br>
+                    <label for="">Days</label>
+                </div>
+                <div>
+                    <input type="text" readonly value="0">
+                    <br>
+                    <label for="">Hours</label>
+                </div>
+                <div>
+                    <input type="text" readonly value="0">
+                    <br>
+                    <label for="">Minutes</label>
+                </div>
+                <div>
+                    <input type="text" readonly value="0">
+                    <br>
+                    <label for="">Seconds</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const endDate = '20 March 2023 10:49 PM'
+
+        document.getElementById('endDate').innerText = endDate;
+        const inputs = document.querySelectorAll('input');
+
+        function clock() {
+            const end = new Date(endDate);
+            const start = new Date();
+            // number of second left between end and present time
+            const diff = (end - start) / 1000;
+
+            // function Stoping condition
+            if (diff < 0) return;
+            
+            // displaying number of day left           // 1day = 24 hours, 24 hours = 3600sec
+            inputs[0].value = Math.floor((diff / 3600 / 24));
+            // displaying number of hours left 
+            inputs[1].value = Math.floor((diff / 3600) % 24);
+            // displaying number of minutes left 
+            inputs[2].value = Math.floor((diff / 60) % 60)
+            // displaying number of seconds left 
+            inputs[3].value = Math.floor(diff % 60)
+        };
+        
+        setInterval(clock, 1000);
+    
+        
+    </script>
+</body>
+</html>
